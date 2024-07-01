@@ -162,7 +162,7 @@ Cria uma nova avaliação para um usuário.
       "nome": "string",
       "descricao": "string"
     }
-  }va
+  }
   ```
 - **400 Bad Request**
   ```json
