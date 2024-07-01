@@ -1,5 +1,4 @@
 ﻿using Emodiario.Models;
-using Emodiario.Services.Crypto;
 using Emodiario.Services.DTOs;
 
 namespace Emodiario.Services.Mapper;

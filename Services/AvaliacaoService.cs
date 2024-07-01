@@ -25,12 +25,17 @@ public class AvaliacaoService : IAvaliacaoService
         return avaliacao.ToAvaliacaoDto();
     }
 
-    public async Task<List<AvaliacaoDTO>> GetAvaliacoesByUsuarioIdAsync(int idUsuario)
+    public async Task<List<AvaliacaoDTO>> GetAvaliacoesByUsuarioIdAsync(int idUsuario, int? categoriaId)
     {
-        return await _dbContext.Avaliacoes
+        var query = _dbContext.Avaliacoes
             .Include(a => a.Usuario)
             .Include(a => a.Categoria)
-            .Where(a => a.IdUsuario == idUsuario)
+            .Where(a => a.IdUsuario == idUsuario);
+
+        if (categoriaId.HasValue)
+            query = query.Where(a => a.IdCategoria == categoriaId.Value);
+
+        return await query
             .Select(a => a.ToAvaliacaoDto())
             .ToListAsync();
     }

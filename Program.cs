@@ -2,11 +2,9 @@ using Emodiario.Data.Configuration;
 using Emodiario.Services;
 using Emodiario.Services.DTOs;
 using Emodiario.Services.Interfaces;
-using Emodiario.Services.Mapper;
 using Emodiario.Services.Validator;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -86,6 +84,12 @@ app.MapPost("/api/categorias", async (CriaCategoriaDTO categoriaDto, ICategoriaS
     return Results.Created($"/api/categorias/{categoriaCriada.Id}", categoriaCriada);
 });
 
+app.MapGet("/api/categorias/usuario/{usuarioId}", async (int usuarioId, ICategoriaService categoriaService) =>
+{
+    var categorias = await categoriaService.GetCategoriasByUsuarioIdAsync(usuarioId);
+    return Results.Ok(categorias);
+});
+
 // Avaliação Endpoints
 app.MapPost("/api/avaliacoes", async (CriaAvaliacaoDTO avaliacaoDto, IAvaliacaoService avaliacaoService, IValidator<CriaAvaliacaoDTO> validator) =>
 {
@@ -97,9 +101,9 @@ app.MapPost("/api/avaliacoes", async (CriaAvaliacaoDTO avaliacaoDto, IAvaliacaoS
     return Results.Created($"/api/avaliacoes/{avaliacaoCriada.Id}", avaliacaoCriada);
 });
 
-app.MapGet("/api/avaliacoes/usuario/{usuarioId}", async (int usuarioId, IAvaliacaoService avaliacaoService) =>
+app.MapGet("/api/avaliacoes/usuario/{usuarioId}", async (int usuarioId, int? categoriaId, IAvaliacaoService avaliacaoService) =>
 {
-    var avaliacoes = await avaliacaoService.GetAvaliacoesByUsuarioIdAsync(usuarioId);
+    var avaliacoes = await avaliacaoService.GetAvaliacoesByUsuarioIdAsync(usuarioId, categoriaId);
     return Results.Ok(avaliacoes);
 });
 

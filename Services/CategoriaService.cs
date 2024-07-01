@@ -2,6 +2,7 @@
 using Emodiario.Services.DTOs;
 using Emodiario.Services.Interfaces;
 using Emodiario.Services.Mapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace Emodiario.Services;
 
@@ -22,5 +23,15 @@ public class CategoriaService : ICategoriaService
         await _dbContext.SaveChangesAsync();
 
         return categoria.ToCategoriaDto();
+    }
+
+    public async Task<List<CategoriaDTO>> GetCategoriasByUsuarioIdAsync(int idUsuario)
+    {
+        return await _dbContext.Avaliacoes
+            .Where(a => a.IdUsuario == idUsuario)
+            .Select(a => a.Categoria)
+            .Distinct()
+            .Select(c => c.ToCategoriaDto())
+            .ToListAsync();
     }
 }

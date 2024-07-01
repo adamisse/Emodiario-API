@@ -1,211 +1,192 @@
-# Documentação da API Emodiario
+
+# Documentação da API - V1
 
 ## Visão Geral
-A API Emodiario fornece endpoints para registro de usuários, login, gerenciamento de categorias e avaliações. É construída usando .NET Minimal API e conecta-se a um banco de dados PostgreSQL.
+A API Emodiario é construída usando .NET Core 6.0, utilizando Minimal API e conectando-se a um banco de dados PostgreSQL.
 
-## URL Base
-`http://localhost:5000` (Temporário)
+## Funcionalidades
+Esta API permite gerenciar criação e autenticação usuários, suas categorias e avaliações.
 
 ## Endpoints
 
 ### Registro de Usuário
 
-**POST** `/api/register`
-
-Registra um novo usuário.
-
-**Corpo da Requisição:**
-```json
-{
-  "nome": "string",
-  "email": "string",
-  "senha": "string",
-  "telefone": "string"
-}
-```
-
-**Resposta:**
-- **201 Created**
+- **URI:** `/api/register`
+- **Método:** POST
+- **Descrição:** Registra um novo usuário.
+- **Request:**
   ```json
   {
-    "id": "int",
     "nome": "string",
     "email": "string",
+    "senha": "string",
     "telefone": "string"
   }
   ```
-- **400 Bad Request**
+- **Response:**
   ```json
   {
-    "errors": [
-      "mensagem de erro"
-    ]
+    "id": 1,
+    "nome": "string",
+    "email": "string",
+    "telefone": "string",
+    "avaliacoes": []
   }
   ```
 
 ### Login de Usuário
 
-**POST** `/api/login`
-
-Autentica um usuário.
-
-**Corpo da Requisição:**
-```json
-{
-  "email": "string",
-  "senha": "string"
-}
-```
-
-**Resposta:**
-- **200 OK**
+- **URI:** `/api/login`
+- **Método:** POST
+- **Descrição:** Autentica um usuário e retorna seus dados.
+- **Request:**
   ```json
   {
-  "id": "int",
-  "nome": "string",
-  "email": "string",
-  "telefone": "string",
-  "avaliacoes": [
-    {
-      "id": 1,
-      "descricao": "Avaliacao 1",
-      "valor": 5,
-      "dataAtualizacao": "2023-06-29T12:34:56",
-      "idCategoria": 1,
-      "categoria": {
+    "email": "string",
+    "senha": "string"
+  }
+  ```
+- **Response:**
+  ```json
+  {
+    "id": 1,
+    "nome": "string",
+    "email": "string",
+    "telefone": "string",
+    "avaliacoes": [
+      {
         "id": 1,
-        "nome": "Categoria 1",
-        "descricao": "Descricao da Categoria 1"
+        "valor": 5,
+        "descricao": "string",
+        "dataAtualizacao": "2024-01-01T00:00:00",
+        "idCategoria": 1,
+        "categoria": {
+          "id": 1,
+          "nome": "string",
+          "descricao": "string"
+        }
       }
-    },
-    {
-      "id": 2,
-      "descricao": "Avaliacao 2",
-      "valor": 4,
-      "dataAtualizacao": "2023-06-29T12:34:56",
-      "idCategoria": 2,
-      "categoria": {
-        "id": 2,
-        "nome": "Categoria 2",
-        "descricao": "Descricao da Categoria 2"
-      }
-    }
-  ]
-}
+    ]
+  }
+  ```
 
-- **401 Unauthorized**
+### Buscar Usuário por ID
+
+- **URI:** `/api/users/{id}`
+- **Método:** GET
+- **Descrição:** Retorna os dados de um usuário específico pelo ID.
+- **Response:**
   ```json
   {
-    "error": "Unauthorized"
+    "id": 1,
+    "nome": "string",
+    "email": "string",
+    "telefone": "string",
+    "avaliacoes": [
+      {
+        "id": 1,
+        "valor": 5,
+        "descricao": "string",
+        "dataAtualizacao": "2024-01-01T00:00:00",
+        "idCategoria": 1,
+        "categoria": {
+          "id": 1,
+          "nome": "string",
+          "descricao": "string"
+        }
+      }
+    ]
   }
   ```
 
 ### Criar Categoria
 
-**POST** `/api/categorias`
-
-Cria uma nova categoria.
-
-**Corpo da Requisição:**
-```json
-{
-  "nome": "string",
-  "descricao": "string"
-}
-```
-
-**Resposta:**
-- **201 Created**
+- **URI:** `/api/categorias`
+- **Método:** POST
+- **Descrição:** Cria uma nova categoria.
+- **Request:**
   ```json
   {
-    "id": "int",
     "nome": "string",
     "descricao": "string"
   }
   ```
-- **400 Bad Request**
+- **Response:**
   ```json
   {
-    "errors": [
-      "mensagem de erro"
-    ]
+    "id": 1,
+    "nome": "string",
+    "descricao": "string"
   }
+  ```
+
+### Buscar Categorias do Usuário
+
+- **URI:** `/api/categorias/usuario/{usuarioId}`
+- **Método:** GET
+- **Descrição:** Retorna as categorias associadas às avaliações de um usuário específico pelo ID do usuário.
+- **Response:**
+  ```json
+  [
+    {
+      "id": 1,
+      "nome": "string",
+      "descricao": "string"
+    }
+  ]
   ```
 
 ### Criar Avaliação
 
-**POST** `/api/avaliacoes`
-
-Cria uma nova avaliação para um usuário.
-
-**Corpo da Requisição:**
-```json
-{
-  "descricao": "string",
-  "valor": 5,
-  "idCategoria": "int",
-  "idUsuario": "int"
-}
-```
-
-**Resposta:**
-- **201 Created**
+- **URI:** `/api/avaliacoes`
+- **Método:** POST
+- **Descrição:** Cria uma nova avaliação.
+- **Request:**
   ```json
   {
-    "id": "int",
+    "valor": 3,
     "descricao": "string",
-    "valor": 5,
-    "dataAtualizacao": "datetime",
-    "idCategoria": "int",
+    "idCategoria": 1,
+    "idUsuario": 1
+  }
+  ```
+- **Response:**
+  ```json
+  {
+    "id": 1,
+    "valor": 3,
+    "descricao": "string",
+    "dataAtualizacao": "2024-01-01T00:00:00",
+    "idCategoria": 1,
     "categoria": {
-      "id": "int",
+      "id": 1,
       "nome": "string",
       "descricao": "string"
     }
   }
   ```
-- **400 Bad Request**
-  ```json
-  {
-    "errors": [
-      "mensagem de erro"
-    ]
-  }
-  ```
 
-### Listar Avaliações de Usuário
+### Buscar Avaliações por Usuário
 
-**GET** `/api/avaliacoes/usuario/{usuarioId}`
-
-Recupera as avaliações de um usuário específico.
-
-**Resposta:**
-- **200 OK**
+- **URI:** `/api/avaliacoes/usuario/{usuarioId}`
+- **Método:** GET
+- **Descrição:** Retorna as avaliações de um usuário específico pelo ID do usuário, com filtro opcional por categoria.
+- **Query Parameters:**
+  - `categoriaId` (opcional): ID da categoria para filtrar as avaliações.
+- **Response:**
   ```json
   [
     {
-      "id": "int",
+      "id": 1,
+      "valor": 5,
       "descricao": "string",
-      "valor": 4,
-      "dataAtualizacao": "datetime",
-      "idCategoria": "int",
+      "dataAtualizacao": "2024-01-01T00:00:00",
+      "idCategoria": 1,
       "categoria": {
-        "id": "int",
+        "id": 1,
         "nome": "string",
         "descricao": "string"
       }
     }
   ]
   ```
-
-### Enum Valor
-
-```json
-{
-  "Excellent": 5,
-  "Good": 4,
-  "Normal": 3,
-  "Bad": 2,
-  "Awful": 1
-}
-```
