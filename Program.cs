@@ -1,9 +1,12 @@
 using Emodiario.Data.Configuration;
-using Emodiario.Models;
 using Emodiario.Services;
+using Emodiario.Services.DTOs;
 using Emodiario.Services.Interfaces;
+using Emodiario.Services.Mapper;
+using Emodiario.Services.Validator;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +17,8 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connect
 // Serviços
 builder.Services.AddValidatorsFromAssemblyContaining<LoginDtoValidator>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<ICategoriaService, CategoriaService>();
+builder.Services.AddScoped<IAvaliacaoService, AvaliacaoService>();
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
@@ -68,6 +73,34 @@ app.MapGet("/api/users/{id}", async (int id, IUsuarioService userService) =>
         return Results.NotFound();
 
     return Results.Ok(user);
+});
+
+// Categoria Endpoints
+app.MapPost("/api/categorias", async (CriaCategoriaDTO categoriaDto, ICategoriaService categoriaService, IValidator<CriaCategoriaDTO> validator) =>
+{
+    var validationResult = validator.Validate(categoriaDto);
+    if (!validationResult.IsValid)
+        return Results.BadRequest(validationResult.Errors);
+
+    var categoriaCriada = await categoriaService.CriaCategoriaAsync(categoriaDto);
+    return Results.Created($"/api/categorias/{categoriaCriada.Id}", categoriaCriada);
+});
+
+// Avaliação Endpoints
+app.MapPost("/api/avaliacoes", async (CriaAvaliacaoDTO avaliacaoDto, IAvaliacaoService avaliacaoService, IValidator<CriaAvaliacaoDTO> validator) =>
+{
+    var validationResult = validator.Validate(avaliacaoDto);
+    if (!validationResult.IsValid)
+        return Results.BadRequest(validationResult.Errors);
+
+    var avaliacaoCriada = await avaliacaoService.CriaAvaliacaoAsync(avaliacaoDto);
+    return Results.Created($"/api/avaliacoes/{avaliacaoCriada.Id}", avaliacaoCriada);
+});
+
+app.MapGet("/api/avaliacoes/usuario/{usuarioId}", async (int usuarioId, IAvaliacaoService avaliacaoService) =>
+{
+    var avaliacoes = await avaliacaoService.GetAvaliacoesByUsuarioIdAsync(usuarioId);
+    return Results.Ok(avaliacoes);
 });
 
 app.Run();

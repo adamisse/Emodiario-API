@@ -1,14 +1,13 @@
-﻿using Emodiario.Models;
+﻿using Emodiario.Services.DTOs;
 using FluentValidation;
 
-namespace Emodiario.Services
+namespace Emodiario.Services.Validator;
+
+public class LoginDtoValidator : AbstractValidator<LoginDTO>
 {
-    public class LoginDtoValidator : AbstractValidator<LoginDTO>
+    public LoginDtoValidator()
     {
-        public LoginDtoValidator()
-        {
-            RuleFor(x => x.Email).NotEmpty().WithMessage("Email é obrigatório").EmailAddress().WithMessage("Email inválido");
-            RuleFor(x => x.Senha).NotEmpty().WithMessage("Senha é obrigatória");
-        }
+        RuleFor(x => x.Email).NotEmpty().WithMessage("Email é obrigatório").EmailAddress().WithMessage("Email inválido");
+        RuleFor(x => x.Senha).NotEmpty().WithMessage("Senha é obrigatória");
     }
 }

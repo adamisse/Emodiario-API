@@ -1,6 +1,6 @@
-﻿namespace Emodiario.Models;
+﻿namespace Emodiario.Services.DTOs;
 
-public class Categoria
+public class CategoriaDTO
 {
     public int Id { get; set; }
     public string? Nome { get; set; }

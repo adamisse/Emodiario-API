@@ -1,15 +1,14 @@
-﻿using Emodiario.Models;
+﻿using Emodiario.Services.DTOs;
 
-namespace Emodiario.Services.Interfaces
+namespace Emodiario.Services.Interfaces;
+
+public interface IUsuarioService
 {
-    public interface IUsuarioService
-    {
-        Task<UsuarioDTO> CriaUsuarioAsync(CriaUsuarioDTO novoUsuario);
+    Task<UsuarioDTO> CriaUsuarioAsync(CriaUsuarioDTO novoUsuario);
 
-        Task<UsuarioDTO?> LoginAsync(LoginDTO loginDTO);
+    Task<UsuarioDTO?> LoginAsync(LoginDTO loginDTO);
 
-        Task<UsuarioDTO?> GetUsuarioByIdAsync(int userId);
+    Task<UsuarioDTO?> GetUsuarioByIdAsync(int userId);
 
-        Task<UsuarioDTO?> GetUsuarioByUsernameAsync(string username);
-    }
+    Task<UsuarioDTO?> GetUsuarioByUsernameAsync(string username);
 }

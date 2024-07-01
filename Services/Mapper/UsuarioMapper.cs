@@ -1,30 +1,25 @@
 ﻿using Emodiario.Models;
 using Emodiario.Services.Crypto;
+using Emodiario.Services.DTOs;
 
-namespace Emodiario.Services.Mapper
+namespace Emodiario.Services.Mapper;
+
+public static class UsuarioMapper
 {
-    public static class UsuarioMapper
+    public static Usuario ToUsuario(this CriaUsuarioDTO dto)
     {
-        public static Usuario ToUsuario(this CriaUsuarioDTO dto)
-        {
-            return new Usuario
-            {
-                Nome = dto.Nome,
-                Email = dto.Email,
-                Telefone = dto.Telefone,
-                SenhaHash = SenhaUtils.HashPassword(dto.Senha!)
-            };
-        }
+        return new Usuario(dto.Nome!, dto.Email!, dto.Senha!, dto.Telefone!);
+    }
 
-        public static UsuarioDTO ToUsuarioDto(this Usuario usuario)
+    public static UsuarioDTO ToUsuarioDto(this Usuario usuario)
+    {
+        return new UsuarioDTO
         {
-            return new UsuarioDTO
-            {
-                Id = usuario.Id,
-                Nome = usuario.Nome,
-                Email = usuario.Email,
-                Telefone = usuario.Telefone
-            };
-        }
+            Id = usuario.Id,
+            Nome = usuario.Nome,
+            Email = usuario.Email,
+            Telefone = usuario.Telefone,
+            Avaliacoes = usuario.Avaliacoes?.Select(a => a.ToAvaliacaoDto()).ToList(),
+        };
     }
 }
