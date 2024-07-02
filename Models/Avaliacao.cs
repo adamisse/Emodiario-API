@@ -8,12 +8,12 @@ public class Avaliacao
     {
     }
 
-    public Avaliacao(ValorAvaliacao valor, string? descricao, int idUsuario, int idCategoria)
+    public Avaliacao(ValorAvaliacao valor, string? descricao, DateTime dataAtualizacao, int idUsuario, int idCategoria)
     {
         Valor = valor;
         Descricao = descricao;
 
-        DataAtualizacao = DateTime.UtcNow;
+        DataAtualizacao = dataAtualizacao;
 
         IdUsuario = idUsuario;
         IdCategoria = idCategoria;

@@ -7,7 +7,7 @@ public static class AvaliacaoMapper
 {
     public static Avaliacao ToAvaliacao(this CriaAvaliacaoDTO dto)
     {
-        return new Avaliacao(dto.Valor, dto.Descricao, dto.IdUsuario, dto.IdCategoria);
+        return new Avaliacao(dto.Valor, dto.Descricao, dto.DataAtualizacao, dto.IdUsuario, dto.IdCategoria);
     }
 
     public static AvaliacaoDTO ToAvaliacaoDto(this Avaliacao avaliacao)
