@@ -19,6 +19,7 @@ public static class CategoriaMapper
         return new CategoriaDTO
         {
             Id = categoria.Id,
+            Nome = categoria.Nome,
             Descricao = categoria.Descricao
         };
     }

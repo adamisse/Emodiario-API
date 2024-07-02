@@ -17,10 +17,19 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Configurações adicionais do modelo, como chaves primárias compostas, índices, etc.
-
-        // Exemplo de configuração de chave primária composta para a entidade Review
         modelBuilder.Entity<Avaliacao>()
-            .HasKey(a => new { a.IdUsuario, a.IdCategoria });
+            .HasKey(a => a.Id);
+
+        modelBuilder.Entity<Avaliacao>()
+            .HasOne(a => a.Usuario)
+            .WithMany(u => u.Avaliacoes)
+            .HasForeignKey(a => a.IdUsuario);
+
+        modelBuilder.Entity<Avaliacao>()
+            .HasOne(a => a.Categoria)
+            .WithMany()
+            .HasForeignKey(a => a.IdCategoria);
+
+        base.OnModelCreating(modelBuilder);
     }
 }

@@ -30,8 +30,9 @@ public class CategoriaService : ICategoriaService
         return await _dbContext.Avaliacoes
             .Where(a => a.IdUsuario == idUsuario)
             .Select(a => a.Categoria)
+            .Where(c => c != null)
             .Distinct()
-            .Select(c => c.ToCategoriaDto())
+            .Select(c => c!.ToCategoriaDto())
             .ToListAsync();
     }
 }

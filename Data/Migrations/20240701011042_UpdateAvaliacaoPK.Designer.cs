@@ -3,6 +3,7 @@ using System;
 using Emodiario.Data.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Emodiario.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240701011042_UpdateAvaliacaoPK")]
+    partial class UpdateAvaliacaoPK
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,6 +32,9 @@ namespace Emodiario.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("CategoriaId")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("DataAtualizacao")
                         .HasColumnType("timestamp with time zone");
 
@@ -42,14 +47,17 @@ namespace Emodiario.Data.Migrations
                     b.Property<int>("IdUsuario")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("UsuarioId")
+                        .HasColumnType("integer");
+
                     b.Property<int>("Valor")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdCategoria");
+                    b.HasIndex("CategoriaId");
 
-                    b.HasIndex("IdUsuario");
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Avaliacoes");
                 });
@@ -102,15 +110,11 @@ namespace Emodiario.Data.Migrations
                 {
                     b.HasOne("Emodiario.Models.Categoria", "Categoria")
                         .WithMany()
-                        .HasForeignKey("IdCategoria")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoriaId");
 
                     b.HasOne("Emodiario.Models.Usuario", "Usuario")
                         .WithMany("Avaliacoes")
-                        .HasForeignKey("IdUsuario")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UsuarioId");
 
                     b.Navigation("Categoria");
 
