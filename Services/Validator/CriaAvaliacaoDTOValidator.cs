@@ -8,7 +8,6 @@ public class CriaAvaliacaoDTOValidator : AbstractValidator<CriaAvaliacaoDTO>
     public CriaAvaliacaoDTOValidator()
     {
         RuleFor(x => x.Descricao)
-            .NotEmpty().WithMessage("Descrição é obrigatória")
             .MaximumLength(500).WithMessage("Descrição pode ter no máximo 500 caracteres");
 
         RuleFor(x => x.IdCategoria)
