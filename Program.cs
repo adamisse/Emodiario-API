@@ -40,12 +40,14 @@ app.UseSwaggerUI(c =>
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "API Emodiário V1");
 });
 
+app.UseRouting();
+
 // Configuração das rotas
 app.UseEndpoints(endpoints =>
 {
     endpoints.ConfiguraEndpointsUsuario();
-    endpoints.ConfiguraCategoriaEndpoints();
-    endpoints.ConfigureAvaliacaoEndpoints();
+    endpoints.ConfiguraEndpointsCategoria();
+    endpoints.ConfigureEndpointsAvaliacao();
 });
 
 app.Run();

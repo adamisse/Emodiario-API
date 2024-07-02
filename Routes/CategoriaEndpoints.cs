@@ -7,7 +7,7 @@ namespace Emodiario.Routes;
 
 public static class CategoriaEndpoints
 {
-    public static void ConfiguraCategoriaEndpoints(this IEndpointRouteBuilder endpoints)
+    public static void ConfiguraEndpointsCategoria(this IEndpointRouteBuilder endpoints)
     {
         endpoints.MapPost("/api/usuarios/{idUsuario}/categorias", async ([FromRoute] int idUsuario, CriaCategoriaDTO categoriaDto, ICategoriaService categoriaService, IValidator<CriaCategoriaDTO> validator) =>
         {

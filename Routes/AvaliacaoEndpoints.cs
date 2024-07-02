@@ -7,7 +7,7 @@ namespace Emodiario.Routes;
 
 public static class AvaliacaoEndpoints
 {
-    public static void ConfigureAvaliacaoEndpoints(this IEndpointRouteBuilder endpoints)
+    public static void ConfigureEndpointsAvaliacao(this IEndpointRouteBuilder endpoints)
     {
         endpoints.MapPost("/api/categorias/{idCategoria}/avaliacoes", async ([FromRoute] int idCategoria, CriaAvaliacaoDTO avaliacaoDto, IAvaliacaoService avaliacaoService, ICategoriaService categoriaService, IValidator<CriaAvaliacaoDTO> validator) =>
         {
