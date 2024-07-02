@@ -51,7 +51,7 @@ public class UsuarioService : IUsuarioService
     {
         var usuario = await _dbContext
             .Usuarios
-            .Include(u => u.Avaliacoes)
+            .Include(u => u.Categorias)
             .FirstOrDefaultAsync(u => u.Nome == username || u.Email == username);
 
         if (usuario != null)

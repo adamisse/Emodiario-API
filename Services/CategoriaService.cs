@@ -1,4 +1,5 @@
 ﻿using Emodiario.Data.Configuration;
+using Emodiario.Models;
 using Emodiario.Services.DTOs;
 using Emodiario.Services.Interfaces;
 using Emodiario.Services.Mapper;
@@ -15,8 +16,9 @@ public class CategoriaService : ICategoriaService
         _dbContext = context;
     }
 
-    public async Task<CategoriaDTO> CriaCategoriaAsync(CriaCategoriaDTO categoriaDto)
+    public async Task<CategoriaDTO> CriaCategoriaAsync(int idUsuario, CriaCategoriaDTO categoriaDto)
     {
+        categoriaDto.idUsuario = idUsuario;
         var categoria = categoriaDto.ToCategoria();
 
         _dbContext.Categorias.Add(categoria);
@@ -25,13 +27,19 @@ public class CategoriaService : ICategoriaService
         return categoria.ToCategoriaDto();
     }
 
+    public async Task<CategoriaDTO> GetCategoriaByIdAsync(int idCategoria)
+    {
+        return (await _dbContext.Categorias
+            .Include(c => c.Avaliacoes)
+            .FirstAsync(c => c.Id == idCategoria))
+            .ToCategoriaDto();
+    }
+
     public async Task<List<CategoriaDTO>> GetCategoriasByUsuarioIdAsync(int idUsuario)
     {
-        return await _dbContext.Avaliacoes
-            .Where(a => a.IdUsuario == idUsuario)
-            .Select(a => a.Categoria)
-            .Where(c => c != null)
-            .Distinct()
+        return await _dbContext.Categorias
+            .Include(c => c.Avaliacoes)
+            .Where(c => c.IdUsuario == idUsuario)
             .Select(c => c!.ToCategoriaDto())
             .ToListAsync();
     }

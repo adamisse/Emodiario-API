@@ -18,7 +18,7 @@ public static class UsuarioMapper
             Nome = usuario.Nome,
             Email = usuario.Email,
             Telefone = usuario.Telefone,
-            Avaliacoes = usuario.Avaliacoes?.Select(a => a.ToAvaliacaoDto()).ToList(),
+            Categorias = usuario.Categorias?.Select(c => c.ToCategoriaDto()).ToList(),
         };
     }
 }

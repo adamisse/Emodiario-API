@@ -17,18 +17,20 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Avaliacao>()
-            .HasKey(a => a.Id);
-
-        modelBuilder.Entity<Avaliacao>()
-            .HasOne(a => a.Usuario)
-            .WithMany(u => u.Avaliacoes)
-            .HasForeignKey(a => a.IdUsuario);
+        modelBuilder.Entity<Usuario>().HasKey(a => a.Id);
+        modelBuilder.Entity<Categoria>().HasKey(a => a.Id);
+        modelBuilder.Entity<Avaliacao>().HasKey(a => a.Id);
 
         modelBuilder.Entity<Avaliacao>()
             .HasOne(a => a.Categoria)
-            .WithMany()
-            .HasForeignKey(a => a.IdCategoria);
+            .WithMany(u => u.Avaliacoes)
+            .HasForeignKey(a => a.IdCategoria)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Categoria>()
+            .HasOne(c => c.Usuario)
+            .WithMany(u => u.Categorias)
+            .HasForeignKey(c => c.IdUsuario);
 
         base.OnModelCreating(modelBuilder);
     }

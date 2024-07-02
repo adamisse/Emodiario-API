@@ -7,7 +7,7 @@ public static class AvaliacaoMapper
 {
     public static Avaliacao ToAvaliacao(this CriaAvaliacaoDTO dto)
     {
-        return new Avaliacao(dto.Valor, dto.Descricao, dto.DataAtualizacao, dto.IdUsuario, dto.IdCategoria);
+        return new Avaliacao(dto.Valor, dto.Descricao, dto.DataAtualizacao, dto.IdCategoria);
     }
 
     public static AvaliacaoDTO ToAvaliacaoDto(this Avaliacao avaliacao)
@@ -18,8 +18,7 @@ public static class AvaliacaoMapper
             Valor = avaliacao.Valor,
             Descricao = avaliacao.Descricao,
             DataAtualizacao = avaliacao.DataAtualizacao,
-            IdCategoria = avaliacao.IdCategoria,
-            Categoria = avaliacao?.Categoria?.ToCategoriaDto()
+            IdCategoria = avaliacao.IdCategoria
         };
     }
 }

@@ -21,5 +21,5 @@ public class Usuario
     public string? Email { get; set; }
     public string? SenhaHash { get; set; }
     public string? Telefone { get; set; }
-    public List<Avaliacao>? Avaliacoes { get; set; } = new List<Avaliacao>();
+    public List<Categoria>? Categorias { get; set; } = new List<Categoria>();
 }

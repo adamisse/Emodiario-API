@@ -10,7 +10,8 @@ public static class CategoriaMapper
         return new Categoria
         {
             Nome = dto.Nome,
-            Descricao = dto.Descricao
+            Descricao = dto.Descricao,
+            IdUsuario = dto.idUsuario
         };
     }
 
@@ -20,7 +21,9 @@ public static class CategoriaMapper
         {
             Id = categoria.Id,
             Nome = categoria.Nome,
-            Descricao = categoria.Descricao
+            Descricao = categoria.Descricao,
+            IdUsuario = categoria.IdUsuario,
+            Avaliacoes = categoria.Avaliacoes?.Select(a => a.ToAvaliacaoDto()).ToList(),
         };
     }
 }

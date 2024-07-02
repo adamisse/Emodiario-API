@@ -6,5 +6,5 @@ public class UsuarioDTO
     public string? Nome { get; set; }
     public string? Email { get; set; }
     public string? Telefone { get; set; }
-    public List<AvaliacaoDTO>? Avaliacoes { get; set; } = new List<AvaliacaoDTO>();
+    public List<CategoriaDTO>? Categorias { get; set; } = new List<CategoriaDTO>();
 }

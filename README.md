@@ -11,7 +11,7 @@ Esta API permite gerenciar criação e autenticação usuários, suas categorias
 
 ### Registro de Usuário
 
-- **URI:** `/api/register`
+- **URI:** `/api/usuarios`
 - **Método:** POST
 - **Descrição:** Registra um novo usuário.
 - **Request:**
@@ -36,7 +36,7 @@ Esta API permite gerenciar criação e autenticação usuários, suas categorias
 
 ### Login de Usuário
 
-- **URI:** `/api/login`
+- **URI:** `/api/usuarios/login`
 - **Método:** POST
 - **Descrição:** Autentica um usuário e retorna seus dados.
 - **Request:**
@@ -72,7 +72,7 @@ Esta API permite gerenciar criação e autenticação usuários, suas categorias
 
 ### Buscar Usuário por ID
 
-- **URI:** `/api/users/{id}`
+- **URI:** `/api/usuarios/{id}`
 - **Método:** GET
 - **Descrição:** Retorna os dados de um usuário específico pelo ID.
 - **Response:**
@@ -101,9 +101,9 @@ Esta API permite gerenciar criação e autenticação usuários, suas categorias
 
 ### Criar Categoria
 
-- **URI:** `/api/categorias`
+- **URI:** `/api/usuarios/{idUsuario}/categorias`
 - **Método:** POST
-- **Descrição:** Cria uma nova categoria.
+- **Descrição:** Cria uma nova categoria para um usuário específico.
 - **Request:**
   ```json
   {
@@ -122,7 +122,7 @@ Esta API permite gerenciar criação e autenticação usuários, suas categorias
 
 ### Buscar Categorias do Usuário
 
-- **URI:** `/api/categorias/usuario/{usuarioId}`
+- **URI:** `/api/usuarios/{idUsuario}/categorias`
 - **Método:** GET
 - **Descrição:** Retorna as categorias associadas às avaliações de um usuário específico pelo ID do usuário.
 - **Response:**
@@ -138,16 +138,14 @@ Esta API permite gerenciar criação e autenticação usuários, suas categorias
 
 ### Criar Avaliação
 
-- **URI:** `/api/avaliacoes`
+- **URI:** `/api/categorias/{idCategoria}/avaliacoes`
 - **Método:** POST
-- **Descrição:** Cria uma nova avaliação.
+- **Descrição:** Cria uma nova avaliação para uma categoria específica.
 - **Request:**
   ```json
   {
     "valor": 3,
-    "descricao": "string",
-    "idCategoria": 1,
-    "idUsuario": 1
+    "descricao": "string"
   }
   ```
 - **Response:**
@@ -166,13 +164,11 @@ Esta API permite gerenciar criação e autenticação usuários, suas categorias
   }
   ```
 
-### Buscar Avaliações por Usuário
+### Buscar Avaliações por Categoria
 
-- **URI:** `/api/avaliacoes/usuario/{usuarioId}`
+- **URI:** `/api/categorias/{idCategoria}/avaliacoes`
 - **Método:** GET
-- **Descrição:** Retorna as avaliações de um usuário específico pelo ID do usuário, com filtro opcional por categoria.
-- **Query Parameters:**
-  - `categoriaId` (opcional): ID da categoria para filtrar as avaliações.
+- **Descrição:** Retorna as avaliações de uma categoria específica pelo ID da categoria.
 - **Response:**
   ```json
   [

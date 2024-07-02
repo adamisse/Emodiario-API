@@ -9,11 +9,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Emodiario.Data.Migrations
+namespace Emodiario.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240701011756_AddPrimaryKeys")]
-    partial class AddPrimaryKeys
+    [Migration("20240702211436_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -41,17 +41,12 @@ namespace Emodiario.Data.Migrations
                     b.Property<int>("IdCategoria")
                         .HasColumnType("integer");
 
-                    b.Property<int>("IdUsuario")
-                        .HasColumnType("integer");
-
                     b.Property<int>("Valor")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IdCategoria");
-
-                    b.HasIndex("IdUsuario");
 
                     b.ToTable("Avaliacoes");
                 });
@@ -67,10 +62,15 @@ namespace Emodiario.Data.Migrations
                     b.Property<string>("Descricao")
                         .HasColumnType("text");
 
+                    b.Property<int>("IdUsuario")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Nome")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IdUsuario");
 
                     b.ToTable("Categorias");
                 });
@@ -103,25 +103,33 @@ namespace Emodiario.Data.Migrations
             modelBuilder.Entity("Emodiario.Models.Avaliacao", b =>
                 {
                     b.HasOne("Emodiario.Models.Categoria", "Categoria")
-                        .WithMany()
+                        .WithMany("Avaliacoes")
                         .HasForeignKey("IdCategoria")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Categoria");
+                });
+
+            modelBuilder.Entity("Emodiario.Models.Categoria", b =>
+                {
                     b.HasOne("Emodiario.Models.Usuario", "Usuario")
-                        .WithMany("Avaliacoes")
+                        .WithMany("Categorias")
                         .HasForeignKey("IdUsuario")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Categoria");
-
                     b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("Emodiario.Models.Categoria", b =>
+                {
+                    b.Navigation("Avaliacoes");
                 });
 
             modelBuilder.Entity("Emodiario.Models.Usuario", b =>
                 {
-                    b.Navigation("Avaliacoes");
+                    b.Navigation("Categorias");
                 });
 #pragma warning restore 612, 618
         }

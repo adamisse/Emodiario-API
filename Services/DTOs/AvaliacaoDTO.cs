@@ -9,5 +9,4 @@ public class AvaliacaoDTO
     public string? Descricao { get; set; }
     public DateTime DataAtualizacao { get; set; } = DateTime.Now;
     public int IdCategoria { get; set; }
-    public CategoriaDTO? Categoria { get; set; }
 }
