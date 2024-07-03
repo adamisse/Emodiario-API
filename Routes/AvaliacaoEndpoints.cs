@@ -15,6 +15,7 @@ public static class AvaliacaoEndpoints
             if (categoria == null)
                 return Results.NotFound($"Categoria com ID {idCategoria} não encontrada.");
 
+            avaliacaoDto.IdCategoria = idCategoria;
             var validationResult = validator.Validate(avaliacaoDto);
             if (!validationResult.IsValid)
                 return Results.BadRequest(validationResult.Errors);

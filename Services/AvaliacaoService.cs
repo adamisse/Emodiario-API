@@ -17,7 +17,6 @@ public class AvaliacaoService : IAvaliacaoService
 
     public async Task<AvaliacaoDTO> CriaAvaliacaoAsync(int idCategoria, CriaAvaliacaoDTO avaliacaoDto)
     {
-        avaliacaoDto.IdCategoria = idCategoria;
         var avaliacao = avaliacaoDto.ToAvaliacao();
 
         _dbContext.Avaliacoes.Add(avaliacao);

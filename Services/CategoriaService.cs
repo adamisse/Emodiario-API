@@ -18,7 +18,6 @@ public class CategoriaService : ICategoriaService
 
     public async Task<CategoriaDTO> CriaCategoriaAsync(int idUsuario, CriaCategoriaDTO categoriaDto)
     {
-        categoriaDto.idUsuario = idUsuario;
         var categoria = categoriaDto.ToCategoria();
 
         _dbContext.Categorias.Add(categoria);
