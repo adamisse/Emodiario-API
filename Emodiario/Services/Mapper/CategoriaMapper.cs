@@ -11,7 +11,7 @@ public static class CategoriaMapper
         {
             Nome = dto.Nome,
             Descricao = dto.Descricao,
-            IdUsuario = dto.idUsuario
+            IdUsuario = dto.IdUsuario
         };
     }
 

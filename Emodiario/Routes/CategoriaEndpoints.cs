@@ -11,7 +11,7 @@ public static class CategoriaEndpoints
     {
         endpoints.MapPost("/api/usuarios/{idUsuario}/categorias", async ([FromRoute] int idUsuario, CriaCategoriaDTO categoriaDto, ICategoriaService categoriaService, IValidator<CriaCategoriaDTO> validator) =>
         {
-            categoriaDto.idUsuario = idUsuario;
+            categoriaDto.IdUsuario = idUsuario;
             var validationResult = validator.Validate(categoriaDto);
             if (!validationResult.IsValid)
                 return Results.BadRequest(validationResult.Errors);

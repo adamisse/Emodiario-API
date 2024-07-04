@@ -12,7 +12,7 @@ public class CriaCategoriaDTOValidator : AbstractValidator<CriaCategoriaDTO>
             .NotEmpty().WithMessage("Nome é obrigatório")
             .MaximumLength(100).WithMessage("Nome pode ter no máximo 100 caracteres");
 
-        RuleFor(x => x.idUsuario)
+        RuleFor(x => x.IdUsuario)
             .GreaterThan(0).WithMessage("ID do usuário deve ser maior que zero");
     }
 }
