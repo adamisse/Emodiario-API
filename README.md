@@ -4,6 +4,12 @@
 ## Visão Geral
 A API Emodiario é construída usando .NET Core 6.0, utilizando Minimal API e conectando-se a um banco de dados PostgreSQL.
 
+# Diagrama de componente
+
+> [C4Model](https://c4model.com/#ComponentDiagram)
+
+![Components](c4-model.png)
+
 ## Funcionalidades
 Esta API permite gerenciar criação e autenticação usuários, suas categorias e avaliações.
 
