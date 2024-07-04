@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Emodiario", "Emodiario.csproj", "{21DD036B-7F31-4762-9F16-786D85C5C9F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Emodiario", "Emodiario\Emodiario.csproj", "{1EDB21B4-75DB-4AE1-8D3B-44778EE6CE65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emodiario.Tests", "..\Tests\Emodiario.Tests.csproj", "{4AA2139B-0094-4684-B7E6-D0A7AC7DD95A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Emodiario.Testes", "Emodiario.Testes\Emodiario.Testes.csproj", "{4E87D6A0-35F3-4722-A337-645D5C865458}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{21DD036B-7F31-4762-9F16-786D85C5C9F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{21DD036B-7F31-4762-9F16-786D85C5C9F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{21DD036B-7F31-4762-9F16-786D85C5C9F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{21DD036B-7F31-4762-9F16-786D85C5C9F6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4AA2139B-0094-4684-B7E6-D0A7AC7DD95A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4AA2139B-0094-4684-B7E6-D0A7AC7DD95A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4AA2139B-0094-4684-B7E6-D0A7AC7DD95A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4AA2139B-0094-4684-B7E6-D0A7AC7DD95A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EDB21B4-75DB-4AE1-8D3B-44778EE6CE65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EDB21B4-75DB-4AE1-8D3B-44778EE6CE65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EDB21B4-75DB-4AE1-8D3B-44778EE6CE65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EDB21B4-75DB-4AE1-8D3B-44778EE6CE65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E87D6A0-35F3-4722-A337-645D5C865458}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E87D6A0-35F3-4722-A337-645D5C865458}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E87D6A0-35F3-4722-A337-645D5C865458}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E87D6A0-35F3-4722-A337-645D5C865458}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
